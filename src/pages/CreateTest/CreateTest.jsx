@@ -51,7 +51,7 @@ const CreateTestPage = () => {
     }
   };
 
-  if (user.role !== 'admin') {
+  if (user.role == 'user') {
     return <Navigate to={'/'} />;
   }
 
