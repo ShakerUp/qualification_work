@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import { Link } from 'react-router-dom';
 
 import styles from './TestCentre.module.scss';
@@ -23,14 +23,9 @@ const TestCentre = () => {
 
   const fetchTests = async () => {
     try {
-      const apiLink = `http://localhost:5000/tests/alltests${
-        selectedCategory !== '0' ? `?category=${selectedCategory}` : ''
-      }`;
-      const response = await axios.get(apiLink, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+      const response = await axios.get(
+        `/tests/alltests${selectedCategory !== '0' ? `?category=${selectedCategory}` : ''}`,
+      );
       setTests(response.data);
     } catch (error) {
       console.error('Error fetching tests:', error);

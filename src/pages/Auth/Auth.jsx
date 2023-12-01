@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axios.js';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -23,10 +23,7 @@ const Auth = () => {
   const onSubmit = async (data) => {
     setErrorMessage('');
     try {
-      const response = await axios.post(
-        `http://localhost:5000/auth/${isLogin ? 'login' : 'register'}`,
-        data,
-      );
+      const response = await axios.post(`/auth/${isLogin ? 'login' : 'register'}`, data);
 
       console.log('Токен доступа:', response.data.token);
       localStorage.setItem('token', response.data.token);

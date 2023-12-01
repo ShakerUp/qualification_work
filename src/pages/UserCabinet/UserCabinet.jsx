@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 
 import styles from './UserCabinet.module.scss'; // Import the SCSS module
 
@@ -24,12 +24,7 @@ const UserCabinet = () => {
 
   const fetchUserResultsData = async () => {
     try {
-      const apiLink = `http://localhost:5000/tests/user-results`;
-      const response = await axios.get(apiLink, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`, // Передача токена авторизации
-        },
-      });
+      const response = await axios.get('/tests/user-results');
       setUserResults(response.data.userResults);
       setTestsDone(response.data.userResults.length);
       setUserData({ name: response.data.name, surname: response.data.surname });
@@ -40,14 +35,7 @@ const UserCabinet = () => {
 
   const fetchTestCorrectAnswers = async (testResultId) => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/tests/getCorrectAnswers/${testResultId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-      );
+      const response = await axios.get(`/tests/getCorrectAnswers/${testResultId}`);
 
       setCorrectAnswers(response.data);
       console.log(correctAnswers);

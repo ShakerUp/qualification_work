@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from './axios.js';
 import { Routes, Route } from 'react-router-dom';
 
 import './index.scss';
@@ -28,11 +28,8 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const response = await axios.get('http://localhost:5000/auth/check', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get('/auth/check');
+        console.log(response);
         if (response.data.isAuthenticated) {
           setUser({
             isAuthenticated: response.data.isAuthenticated,

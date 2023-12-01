@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 
 import styles from './Library.module.scss';
 
@@ -31,14 +31,9 @@ const Library = () => {
   const fetchLibraryData = async () => {
     try {
       setIsLoading(true);
-      const apiLink = `http://localhost:5000/library/books${
-        selectedCategory !== '0' ? `?category=${selectedCategory}` : ''
-      }`;
-      const response = await axios.get(apiLink, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+      const response = await axios.get(
+        `/library/books${selectedCategory !== '0' ? `?category=${selectedCategory}` : ''}`,
+      );
 
       setTopics(response.data);
       setIsLoading(false);

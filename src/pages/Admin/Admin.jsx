@@ -1,6 +1,6 @@
 // AdminPage.js
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from '../../App';
@@ -17,11 +17,7 @@ const AdminPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/auth/getAllUsers', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+      const response = await axios.get('/auth/getAllUsers');
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -30,17 +26,9 @@ const AdminPage = () => {
 
   const changeUserRole = async (userId, role) => {
     try {
-      await axios.put(
-        `http://localhost:5000/auth/users/${userId}/promote`,
-        {
-          newRole: role,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-      );
+      await axios.put(`/auth/users/${userId}/promote`, {
+        newRole: role,
+      });
 
       fetchUsers();
     } catch (error) {

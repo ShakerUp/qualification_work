@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axios.js';
 import { Link, Navigate } from 'react-router-dom';
 
 import styles from './CreateTest.module.scss';
@@ -13,7 +13,6 @@ const CreateTestPage = () => {
   const [description, setDescription] = React.useState('');
   const [isTestCreated, setIsTestCreated] = React.useState(false);
   const { user } = React.useContext(AuthContext);
-
 
   React.useEffect(() => {
     setIsTestCreated(false);
@@ -37,21 +36,13 @@ const CreateTestPage = () => {
 
   const handleSaveTest = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:5000/tests/create-test',
-        {
-          testName, // Make sure testName is set
-          showCorrectAnswers, // Make sure showCorrectAnswers is set
-          category, // Make sure category is set
-          questions,
-          description, // Add description if needed
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-      );
+      const response = await axios.post('/tests/create-test', {
+        testName,
+        showCorrectAnswers,
+        category,
+        questions,
+        description,
+      });
 
       console.log('Test created:', response.data);
       setIsTestCreated(true);

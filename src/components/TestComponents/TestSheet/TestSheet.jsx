@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../../axios.js';
 
 import { useParams } from 'react-router-dom';
 
@@ -20,11 +20,7 @@ const TestSheet = () => {
     setIsAnswerSent(false);
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/tests/${testId}/questions`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
+        const response = await axios.get(`/tests/${testId}/questions`);
         setQuestions(response.data.questions);
         setTestName(response.data.testName);
         setDescription(response.data.description);
@@ -55,15 +51,9 @@ const TestSheet = () => {
   const handleSubmitAnswers = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `http://localhost:5000/tests/${testId}/submit`,
-        { answers },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-      );
+      const response = await axios.post(`/tests/${testId}/submit`, {
+        answers,
+      });
       setTestResult(response.data);
       setIsAnswerSent(true);
     } catch (error) {
