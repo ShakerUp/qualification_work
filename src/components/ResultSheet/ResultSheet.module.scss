@@ -1,0 +1,97 @@
+.resultContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccdbdc;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 40px;
+  height: 75vh;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.buttonContainer {
+  position: absolute;
+  top: 80%;
+  .button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.progressContainer {
+  width: 100%;
+  height: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease-in-out;
+}
+
+.scoreText {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #666;
+}
+
+.markText {
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+  animation: scaleIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

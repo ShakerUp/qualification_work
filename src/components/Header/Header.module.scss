@@ -1,0 +1,23 @@
+.header {
+  padding: 20px 0;
+  background-color: #9ad1d4;
+  border-radius: 15px 15px 0 0;
+  border-bottom: 2px solid black;
+
+  .leftComponents {
+    display: flex;
+    gap: 20px;
+  }
+
+  .container {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .headerLogo {
+      display: flex;
+      cursor: pointer;
+    }
+  }
+}

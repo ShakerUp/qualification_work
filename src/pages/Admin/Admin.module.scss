@@ -1,0 +1,14 @@
+.adminContainer {
+  width: 100%;
+  background-color: #ccdbdc;
+  font-size: 16px;
+  border-radius: 0px 0px 15px 15px;
+
+  .userList {
+    padding: 15px;
+    li {
+      padding: 5px;
+      border: 1px solid black;
+    }
+  }
+}

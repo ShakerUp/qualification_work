@@ -1,0 +1,61 @@
+.content {
+  width: 100%;
+  background-color: #ccdbdc;
+  font-size: 16px;
+  border-radius: 0px 0px 15px 15px;
+
+  .libraryInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    gap: 20px;
+    background-color: #007ea7;
+    border-bottom: 2px solid black;
+
+    .search {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      padding: 0 10px;
+      border-radius: 10px;
+      input {
+        background-color: none;
+        padding: 15px 10px;
+        outline: none;
+        font-size: 13px;
+        font-weight: 800;
+        width: 400px;
+      }
+    }
+  }
+
+  .libraryItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 16px;
+    padding: 24px;
+    margin-bottom: 15px;
+  }
+
+  .categories {
+    overflow-x: scroll;
+    white-space: nowrap;
+    ul {
+      display: flex;
+      li {
+        background-color: #fff;
+        padding: 13px 30px;
+        border-radius: 30px;
+        margin-right: 10px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .active {
+        background-color: #282828;
+        color: #fff;
+      }
+    }
+  }
+}
+
