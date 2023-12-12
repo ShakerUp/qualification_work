@@ -43,14 +43,14 @@ const Auth = () => {
     await checkAuth();
   };
 
-  console.log('Re-rendered');
-
   if (user.isAuthenticated) {
     return (
       <div className={styles.container}>
         <div className={styles.authorizedContainer}>
           <img width={128} height={128} src="img/tick.png" alt="Authorized!" />
-          <h1>You are authorized as {user.role.toUpperCase()}!</h1>
+          <h1>
+            Hello, {user.username}! You are authorized as {user.role.toUpperCase()}!
+          </h1>
           <Link to="/">
             <button className={styles.button}>Home</button>
             <button onClick={() => logOut()} className={styles.button}>

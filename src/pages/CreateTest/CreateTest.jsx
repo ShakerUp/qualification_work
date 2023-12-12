@@ -51,7 +51,7 @@ const CreateTestPage = () => {
     }
   };
 
-  if (user.role == 'user') {
+  if (user.role === 'user') {
     return <Navigate to={'/'} />;
   }
 
@@ -82,7 +82,7 @@ const CreateTestPage = () => {
         />
       </label>
       <label>
-        Category:
+        Category (1-Grammar | 2-Vocabulary):
         <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
       </label>
       <label>

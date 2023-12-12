@@ -34,12 +34,14 @@ function App() {
           setUser({
             isAuthenticated: response.data.isAuthenticated,
             role: response.data.role,
+            username: response.data.username,
           });
           return true;
         } else {
           setUser({
             isAuthenticated: response.data.isAuthenticated,
             role: response.data.role,
+            username: response.data.username,
           });
           return false;
         }

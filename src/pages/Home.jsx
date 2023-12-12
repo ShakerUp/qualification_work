@@ -24,6 +24,12 @@ const Home = () => {
           mainImg={'img/user_1.png'}
           link={'/user-cabinet'}
         />
+        <InfoBlock
+          header={`Teacher's posts`}
+          desc={'Check your homework or tasks'}
+          mainImg={'img/teacher.png'}
+          link={'/teachers-posts'}
+        />
       </div>
     </div>
   );
