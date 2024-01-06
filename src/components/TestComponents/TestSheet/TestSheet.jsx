@@ -26,8 +26,11 @@ const TestSheet = () => {
         setDescription(response.data.description);
         const initialAnswers = {};
         response.data.questions.forEach((question) => {
-          if (question.questionType === 'multiplechoice') {
-            initialAnswers[question._id] = null;
+          if (
+            question.questionType === 'multiplechoice' ||
+            question.questionType === 'multipleanswer'
+          ) {
+            initialAnswers[question._id] = [];
           } else if (question.questionType === 'openquestion') {
             initialAnswers[question._id] = '';
           }
@@ -41,11 +44,19 @@ const TestSheet = () => {
     fetchQuestions();
   }, [testId]);
 
-  const handleAnswerChange = (questionId, newValue) => {
-    setAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [questionId]: newValue,
-    }));
+  console.log(answers);
+
+  const handleCheckboxChange = (questionId, option) => {
+    const newAnswers = { ...answers };
+    if (newAnswers[questionId].includes(option)) {
+      newAnswers[questionId] = newAnswers[questionId].filter((answer) => answer !== option);
+      console.log('1');
+    } else {
+      newAnswers[questionId] = [...newAnswers[questionId], option];
+      console.log('2');
+    }
+
+    setAnswers(newAnswers);
   };
 
   const handleSubmitAnswers = async (e) => {
@@ -59,6 +70,13 @@ const TestSheet = () => {
     } catch (error) {
       console.error('Error sending answers:', error);
     }
+  };
+
+  const handleAnswerChange = (questionId, newValue) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: newValue,
+    }));
   };
 
   return isAnswerSent ? (
@@ -75,6 +93,7 @@ const TestSheet = () => {
             <div key={question._id} className={styles.questionContainer}>
               <div className={styles.questionNumber}>{index + 1}</div>
               <p className={styles.questionText}>{question.questionText}</p>
+
               {question.questionType === 'multiplechoice' && (
                 <div className={styles.optionsContainer}>
                   {question.options.map((option) => (
@@ -92,6 +111,7 @@ const TestSheet = () => {
                   ))}
                 </div>
               )}
+
               {question.questionType === 'openquestion' && (
                 <div className={styles.answerContainer}>
                   <input
@@ -100,6 +120,24 @@ const TestSheet = () => {
                     onChange={(e) => handleAnswerChange(question._id, e.target.value)}
                     className={styles.openAnswerInput}
                   />
+                </div>
+              )}
+
+              {question.questionType === 'multipleanswer' && (
+                <div className={styles.optionsContainer}>
+                  {question.options.map((option) => (
+                    <label key={option} className={styles.optionLabel}>
+                      <input
+                        type="checkbox"
+                        name={question._id}
+                        value={option}
+                        checked={answers[question._id].includes(option)}
+                        onChange={() => handleCheckboxChange(question._id, option)}
+                        className={styles.optionInput}
+                      />
+                      {option}
+                    </label>
+                  ))}
                 </div>
               )}
             </div>

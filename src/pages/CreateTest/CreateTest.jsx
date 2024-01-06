@@ -19,11 +19,24 @@ const CreateTestPage = () => {
   }, []);
 
   const handleAddQuestion = (questionType) => {
+    let newOptions;
+    let newCorrectAnswers;
+
+    if (questionType === 'multiplechoice') {
+      newOptions = ['', '', '', ''];
+      newCorrectAnswers = '';
+    } else if (questionType === 'openquestion') {
+      newOptions = [];
+      newCorrectAnswers = '';
+    } else if (questionType === 'multipleanswer') {
+      newOptions = ['', '', '', '', '', ''];
+      newCorrectAnswers = [];
+    }
     const newQuestion = {
       questionType,
       questionText: '',
-      options: questionType === 'multiplechoice' ? ['', '', '', ''] : [],
-      correctAnswer: questionType === 'multiplechoice' ? '' : '',
+      options: newOptions,
+      correctAnswer: newCorrectAnswers,
     };
     setQuestions([...questions, newQuestion]);
   };
@@ -31,6 +44,19 @@ const CreateTestPage = () => {
   const handleQuestionChange = (index, field, value) => {
     const newQuestions = [...questions];
     newQuestions[index][field] = value;
+    setQuestions(newQuestions);
+  };
+
+  const handleCheckboxChange = (questionIndex, option) => {
+    const newQuestions = [...questions];
+    const question = newQuestions[questionIndex];
+
+    const newCorrectAnswers = question.correctAnswer.includes(option)
+      ? question.correctAnswer.filter((ans) => ans !== option)
+      : [...question.correctAnswer, option];
+
+    question.correctAnswer = newCorrectAnswers;
+
     setQuestions(newQuestions);
   };
 
@@ -93,6 +119,7 @@ const CreateTestPage = () => {
       <br />
       <button onClick={() => handleAddQuestion('multiplechoice')}>+ Multiple Choice</button>
       <button onClick={() => handleAddQuestion('openquestion')}>+ Open Question</button>
+      <button onClick={() => handleAddQuestion('multipleanswer')}>+ Multiple Answers</button>
       <h2>Questions:</h2>
       {questions.map((question, index) => (
         <div key={index} className={styles.questionContainer}>
@@ -102,6 +129,7 @@ const CreateTestPage = () => {
               value={question.questionType}
               onChange={(e) => handleQuestionChange(index, 'questionType', e.target.value)}>
               <option value="multiplechoice">Multiple Choice</option>
+              <option value="multipleanswer">Multiple Answers</option>
               <option value="openquestion">Open Question</option>
             </select>
           </label>
@@ -150,6 +178,31 @@ const CreateTestPage = () => {
                   onChange={(e) => handleQuestionChange(index, 'correctAnswer', e.target.value)}
                 />
               </label>
+            </div>
+          )}
+          {question.questionType === 'multipleanswer' && (
+            <div>
+              <label>Options:</label>
+              {question.options.map((option, optionIndex) => (
+                <div key={optionIndex}>
+                  <input
+                    type="text"
+                    value={option}
+                    onChange={(e) =>
+                      handleQuestionChange(index, 'options', [
+                        ...question.options.slice(0, optionIndex),
+                        e.target.value,
+                        ...question.options.slice(optionIndex + 1),
+                      ])
+                    }
+                  />
+                  <input
+                    type="checkbox"
+                    checked={question.correctAnswer.includes(option)}
+                    onChange={() => handleCheckboxChange(index, option)}
+                  />
+                </div>
+              ))}
             </div>
           )}
           <br />

@@ -20,7 +20,7 @@ const Home = () => {
         />
         <InfoBlock
           header={'User Cabinet'}
-          desc={'You own cabinet'}
+          desc={'Your own cabinet'}
           mainImg={'img/user_1.png'}
           link={'/user-cabinet'}
         />
@@ -29,6 +29,12 @@ const Home = () => {
           desc={'Check your homework or tasks'}
           mainImg={'img/teacher.png'}
           link={'/teachers-posts'}
+        />
+           <InfoBlock
+          header={`Teacher's cabinet`}
+          desc={'Your own cabinet'}
+          mainImg={'img/teacher.png'}
+          link={'/teacher-cabinet'}
         />
       </div>
     </div>

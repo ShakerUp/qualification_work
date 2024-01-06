@@ -14,6 +14,9 @@ import Auth from './pages/Auth/Auth';
 import CreateTest from './pages/CreateTest/CreateTest';
 import TestSheet from './components/TestComponents/TestSheet/TestSheet';
 import AdminPanel from './pages/Admin/Admin';
+import TeacherCabinet from './pages/Teacher/TeacherCabinet/TeacherCabinet.jsx';
+import TeacherTests from './pages/Teacher/TeacherTests/TeacherTests.jsx';
+import TeacherResults from './pages/Teacher/TeacherResults/TeacherResults.jsx';
 
 export const AuthContext = React.createContext();
 
@@ -74,6 +77,9 @@ function App() {
           <Route path="/create-test" element={<CreateTest />} />
           <Route path="/test/:testId" element={<TestSheet />} />
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/teacher-cabinet" element={<TeacherCabinet />} />
+          <Route path="/teacher-cabinet/test" element={<TeacherTests />} />
+          <Route path="/teacher-cabinet/results" element={<TeacherResults />} />
         </Routes>
       </div>
     </AuthContext.Provider>
