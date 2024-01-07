@@ -17,6 +17,8 @@ import AdminPanel from './pages/Admin/Admin';
 import TeacherCabinet from './pages/Teacher/TeacherCabinet/TeacherCabinet.jsx';
 import TeacherTests from './pages/Teacher/TeacherTests/TeacherTests.jsx';
 import TeacherResults from './pages/Teacher/TeacherResults/TeacherResults.jsx';
+import TeacherAddPost from './pages/Teacher/TeacherAddPost/TeacherAddPost.jsx';
+import TeacherPosts from './pages/Teacher/TeacherPosts/TeacherPosts.jsx';
 
 export const AuthContext = React.createContext();
 
@@ -80,6 +82,8 @@ function App() {
           <Route path="/teacher-cabinet" element={<TeacherCabinet />} />
           <Route path="/teacher-cabinet/test" element={<TeacherTests />} />
           <Route path="/teacher-cabinet/results" element={<TeacherResults />} />
+          <Route path="/teacher-cabinet/posts/create" element={<TeacherAddPost />} />
+          <Route path="/teacher-cabinet/posts" element={<TeacherPosts />} />
         </Routes>
       </div>
     </AuthContext.Provider>

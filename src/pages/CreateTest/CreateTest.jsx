@@ -18,6 +18,8 @@ const CreateTestPage = () => {
     setIsTestCreated(false);
   }, []);
 
+  console.log(questions);
+
   const handleAddQuestion = (questionType) => {
     let newOptions;
     let newCorrectAnswers;
@@ -42,6 +44,7 @@ const CreateTestPage = () => {
   };
 
   const handleQuestionChange = (index, field, value) => {
+    console.log(index, field, value)
     const newQuestions = [...questions];
     newQuestions[index][field] = value;
     setQuestions(newQuestions);
@@ -57,6 +60,24 @@ const CreateTestPage = () => {
 
     question.correctAnswer = newCorrectAnswers;
 
+    setQuestions(newQuestions);
+  };
+
+  const handleAddOption = (questionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options.push('');
+    setQuestions(newQuestions);
+  };
+
+  const handleDeleteOption = (questionIndex, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options.splice(optionIndex, 1);
+    setQuestions(newQuestions);
+  };
+
+  const handleDeleteQuestion = (questionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions.splice(questionIndex, 1);
     setQuestions(newQuestions);
   };
 
@@ -116,10 +137,7 @@ const CreateTestPage = () => {
         <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
       </label>
       <br />
-      <br />
-      <button onClick={() => handleAddQuestion('multiplechoice')}>+ Multiple Choice</button>
-      <button onClick={() => handleAddQuestion('openquestion')}>+ Open Question</button>
-      <button onClick={() => handleAddQuestion('multipleanswer')}>+ Multiple Answers</button>
+      
       <h2>Questions:</h2>
       {questions.map((question, index) => (
         <div key={index} className={styles.questionContainer}>
@@ -164,8 +182,12 @@ const CreateTestPage = () => {
                     checked={question.correctAnswer === option}
                     onChange={() => handleQuestionChange(index, 'correctAnswer', option)}
                   />
+                  <button onClick={() => handleDeleteOption(index, optionIndex)}>
+                    Delete Option
+                  </button>
                 </div>
               ))}
+              <button onClick={() => handleAddOption(index)}>Add Option</button>
             </div>
           )}
           {question.questionType === 'openquestion' && (
@@ -201,13 +223,21 @@ const CreateTestPage = () => {
                     checked={question.correctAnswer.includes(option)}
                     onChange={() => handleCheckboxChange(index, option)}
                   />
+                  <button onClick={() => handleDeleteOption(index, optionIndex)}>
+                    Delete Option
+                  </button>
                 </div>
               ))}
+              <button onClick={() => handleAddOption(index)}>Add Option</button>
             </div>
           )}
           <br />
+          <button onClick={() => handleDeleteQuestion(index)}>Delete Question</button>
         </div>
       ))}
+      <button onClick={() => handleAddQuestion('multiplechoice')}>+ Multiple Choice</button>
+      <button onClick={() => handleAddQuestion('openquestion')}>+ Open Question</button>
+      <button onClick={() => handleAddQuestion('multipleanswer')}>+ Multiple Answers</button>
       <button onClick={handleSaveTest}>Save Test</button>
     </div>
   );

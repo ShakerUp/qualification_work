@@ -50,14 +50,14 @@ const TestSheet = () => {
     const newAnswers = { ...answers };
     if (newAnswers[questionId].includes(option)) {
       newAnswers[questionId] = newAnswers[questionId].filter((answer) => answer !== option);
-      console.log('1');
     } else {
       newAnswers[questionId] = [...newAnswers[questionId], option];
-      console.log('2');
     }
 
     setAnswers(newAnswers);
   };
+
+  console.log(answers)
 
   const handleSubmitAnswers = async (e) => {
     e.preventDefault();
@@ -75,7 +75,7 @@ const TestSheet = () => {
   const handleAnswerChange = (questionId, newValue) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionId]: newValue,
+      [questionId]: [newValue],
     }));
   };
 
@@ -102,7 +102,7 @@ const TestSheet = () => {
                         type="radio"
                         name={question._id}
                         value={option}
-                        checked={answers[question._id] === option}
+                        checked={answers[question._id].join(', ') === option}
                         onChange={(e) => handleAnswerChange(question._id, e.target.value)}
                         className={styles.optionInput}
                       />

@@ -41,19 +41,19 @@ const Header = () => {
           {user.isAuthenticated && user.role === 'admin' && (
             <>
               <Link to="/admin">
-                <img width={35} height={35} src="img/settings.png" alt="Admin Page" />
+                <img width={35} height={35} src="/img/settings.png" alt="Admin Page" />
               </Link>
             </>
           )}
           {user.isAuthenticated && user.role !== 'user' && (
             <>
               <Link to="/create-test">
-                <img width={35} height={35} src="img/add.png" alt="Add Page" />
+                <img width={35} height={35} src="/img/add.png" alt="Add Page" />
               </Link>
             </>
           )}
           <Link to="/auth">
-            <img width={35} height={35} src="img/user.png" alt="Login" />
+            <img width={35} height={35} src="/img/user.png" alt="Login" />
           </Link>
         </div>
       </div>

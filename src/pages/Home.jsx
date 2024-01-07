@@ -1,8 +1,16 @@
 import React from 'react';
 
+import { AuthContext } from '../App';
+
 import InfoBlock from '../components/InfoBlock/InfoBlock';
 
 const Home = () => {
+  const { user, checkAuth } = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    checkAuth();
+  }, []);
+
   return (
     <div className="content">
       <div className="home-items">
@@ -30,7 +38,7 @@ const Home = () => {
           mainImg={'img/teacher.png'}
           link={'/teachers-posts'}
         />
-           <InfoBlock
+        <InfoBlock
           header={`Teacher's cabinet`}
           desc={'Your own cabinet'}
           mainImg={'img/teacher.png'}

@@ -24,7 +24,9 @@
     margin-bottom: 15px;
   }
 }
-
+.questionsContainer {
+  overflow: scroll;
+}
 .popupContainerVisible {
   opacity: 1;
   visibility: visible;
@@ -45,7 +47,6 @@
   flex-direction: column;
   transition: transform 0.3s ease-in-out;
   border-radius: 15px;
-  overflow: scroll;
 
   table {
     width: 100%;
@@ -103,14 +104,22 @@
 
     .text {
       display: flex;
-      h4{
+      h4 {
         margin-right: 5px;
       }
     }
 
-    .questionNumber{
+    .questionNumber {
       margin-right: 15px;
       font-weight: 800;
     }
   }
+}
+
+.green {
+  background-color: lightgreen;
+}
+
+.red {
+  background-color: lightcoral;
 }

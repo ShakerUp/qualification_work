@@ -1,12 +1,16 @@
-// In your TeacherResults.jsx
-
 import React, { useState, useEffect } from 'react';
 import axios from '../../../axios.js';
+
+import CabinetPopUp from '../../../components/CabinetPopUp/CabinetPopUp.jsx';
+
 import styles from './TeacherResults.module.scss';
 
 const TeacherResults = () => {
   const [teacherResults, setTeacherResults] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [isPopUpVisible, setPopUpVisible] = React.useState(false);
+  const [correctAnswers, setCorrectAnswers] = React.useState([]);
+  const [studentAnswers, setStudentAnswers] = React.useState([]);
 
   useEffect(() => {
     fetchTeacherResults();
@@ -28,6 +32,25 @@ const TeacherResults = () => {
     return splited[0] + ' ' + splited[1].slice(0, -5);
   };
 
+  const handlePopUpClose = () => {
+    setPopUpVisible(false);
+  };
+
+  const fetchTestCorrectAnswers = async (resultId) => {
+    try {
+      const response = await axios.get(`/tests/getCorrectAnswers/${resultId}`);
+      setCorrectAnswers(response.data);
+
+      const selectedResult = await teacherResults.find((result) => result._id === resultId);
+      setStudentAnswers(selectedResult.userAnswers);
+      setPopUpVisible(true);
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+    }
+  };
+
+  console.log(teacherResults);
+
   return (
     <div className={styles.contentTop}>
       <div className={styles.libraryInfo}>
@@ -43,10 +66,25 @@ const TeacherResults = () => {
         </div>
       </div>
       <div className={styles.content}>
+        <CabinetPopUp
+          title={correctAnswers.testName}
+          onClose={handlePopUpClose}
+          opened={isPopUpVisible}
+          questions={correctAnswers.questions}
+          studentName={correctAnswers.fullName}
+          studentAnswers={studentAnswers}
+        />
         {teacherResults
-          .filter((result) => result.userName.toLowerCase().includes(searchValue.toLowerCase()))
+          .filter(
+            (result) =>
+              result.userName.toLowerCase().includes(searchValue.toLowerCase()) ||
+              result.testName.toLowerCase().includes(searchValue.toLowerCase()),
+          )
           .map((result) => (
-            <div key={result._id} className={styles.resultBlock}>
+            <div
+              key={result._id}
+              onClick={(id) => fetchTestCorrectAnswers(result._id)}
+              className={styles.resultBlock}>
               <div className={styles.resultBlockInfo}>
                 <h3>{result.testName}</h3>
                 <span>
