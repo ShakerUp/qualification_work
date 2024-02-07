@@ -83,7 +83,7 @@ const Library = () => {
           </div>
         </div>
       </div>
-      <section className={styles.libraryItems}>
+      <div className={styles.libraryItems}>
         {isLoading
           ? [...Array(25)].map((item, index) => <LibrarySkeleton key={index} />)
           : topics
@@ -97,7 +97,7 @@ const Library = () => {
                   isLoading={isLoading}
                 />
               ))}
-      </section>
+      </div>
     </div>
   );
 };

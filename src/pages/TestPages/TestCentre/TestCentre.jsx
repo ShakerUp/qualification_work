@@ -1,11 +1,11 @@
 import React from 'react';
-import axios from '../../axios';
+import axios from '../../../axios';
 import { Link } from 'react-router-dom';
 
 import styles from './TestCentre.module.scss';
 
-import { AuthContext } from '../../App';
-import Unauthorized from '../../components/Unauthorized/Unauthorized';
+import { AuthContext } from '../../../App';
+import Unauthorized from '../../../components/Unauthorized/Unauthorized';
 
 const TestCentre = () => {
   const [tests, setTests] = React.useState([]);

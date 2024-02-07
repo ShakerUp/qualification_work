@@ -27,9 +27,9 @@ const Home = () => {
           link={'/test-centre'}
         />
         <InfoBlock
-          header={'User Cabinet'}
+          header={`Student's office`}
           desc={'Your own cabinet'}
-          mainImg={'img/user_1.png'}
+          mainImg={'img/student.png'}
           link={'/user-cabinet'}
         />
         <InfoBlock
@@ -38,12 +38,14 @@ const Home = () => {
           mainImg={'img/teacher.png'}
           link={'/teachers-posts'}
         />
-        <InfoBlock
-          header={`Teacher's cabinet`}
-          desc={'Your own cabinet'}
-          mainImg={'img/teacher.png'}
-          link={'/teacher-cabinet'}
-        />
+        {user.role && user.role != 'user' && (
+          <InfoBlock
+            header={`Teacher's office`}
+            desc={'Your own cabinet'}
+            mainImg={'img/worker.png'}
+            link={'/teacher-cabinet'}
+          />
+        )}
       </div>
     </div>
   );

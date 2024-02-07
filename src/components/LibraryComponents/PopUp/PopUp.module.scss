@@ -45,7 +45,10 @@
   flex-direction: column;
   transition: transform 0.3s ease-in-out;
   border-radius: 15px;
-  overflow: scroll;
+
+  .description {
+    overflow: scroll;
+  }
 
   table {
     width: 100%;

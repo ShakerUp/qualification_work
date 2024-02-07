@@ -52,6 +52,13 @@ const Header = () => {
               </Link>
             </>
           )}
+          {user.isAuthenticated && user.role !== 'user' && (
+            <>
+              <Link to="/teacher-cabinet/posts/create">
+                <img width={35} height={35} src="/img/newdoc.png" alt="Add Post" />
+              </Link>
+            </>
+          )}
           <Link to="/auth">
             <img width={35} height={35} src="/img/user.png" alt="Login" />
           </Link>

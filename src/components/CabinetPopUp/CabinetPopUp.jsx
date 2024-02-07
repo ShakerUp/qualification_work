@@ -2,18 +2,19 @@ import React from 'react';
 import styles from './CabinetPopUp.module.scss';
 
 const CabinetPopUp = ({ title, onClose, opened, questions, studentName, studentAnswers }) => {
-  console.log(studentAnswers);
-  console.log(questions);
+  const arraysEqual = (arr1, arr2) => {
+    try {
+      const sortedArr1 = arr1.slice().sort();
+      const sortedArr2 = arr2.slice().sort();
 
-  function arraysEqual(arr1, arr2) {
-    const sortedArr1 = arr1.slice().sort();
-    const sortedArr2 = arr2.slice().sort();
-
-    return (
-      sortedArr1.length === sortedArr2.length &&
-      sortedArr1.every((value, index) => value === sortedArr2[index])
-    );
-  }
+      return (
+        sortedArr1.length === sortedArr2.length &&
+        sortedArr1.every((value, index) => value === sortedArr2[index])
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={`${styles.popupContainer} ${opened ? styles.popupContainerVisible : ''}`}>
@@ -50,7 +51,7 @@ const CabinetPopUp = ({ title, onClose, opened, questions, studentName, studentA
                 </div>
                 <div className={styles.text}>
                   <h4>Correct Answer:</h4>
-                  <span>{question.correctAnswer}</span>
+                  <span>{question.correctAnswer.join(', ')}</span>
                 </div>
                 {studentAnswers && studentAnswers[question._id] !== undefined && (
                   <div className={styles.text}>

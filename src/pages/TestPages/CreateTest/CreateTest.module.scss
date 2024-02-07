@@ -1,0 +1,336 @@
+.createTestContainer {
+  width: 80%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 0px 0px 15px 15px;
+  background-color: #ccdbdc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .headingCenter {
+    margin: 0;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .inputGroup {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 25px;
+    border-radius: 15px;
+    padding: 30px 15px 15px;
+
+    .inputContainer {
+      position: relative;
+      width: 100%;
+    }
+
+    .inputContainer textarea {
+      font-size: 20px;
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid #8a8a8a;
+      padding: 5px 0;
+      background-color: transparent;
+      outline: none;
+      resize: vertical;
+    }
+
+    .inputContainer .label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #8a8a8a;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .inputContainer textarea:focus ~ .label,
+    .inputContainer textarea:valid ~ .label {
+      top: -20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .inputContainer .underline {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: #333;
+      transform: scaleX(0);
+      transition: all 0.3s ease;
+    }
+
+    .inputContainer textarea:focus ~ .underline,
+    .inputContainer textarea:valid ~ .underline {
+      transform: scaleX(1);
+    }
+  }
+
+  .paramsGroup {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    label {
+      margin: 0;
+      padding: 0;
+    }
+
+    input[type='number'] {
+      padding: 3px;
+      width: 100px;
+    }
+
+    .dataGroup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .materialCheckbox {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        color: #777777;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      .materialCheckbox input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .checkmark {
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        border: 2px solid #4957a0;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+
+      .materialCheckbox input[type='checkbox']:checked ~ .checkmark {
+        background-color: #5faabd;
+        border-color: #4957a0;
+      }
+
+      .materialCheckbox input[type='checkbox']:checked ~ .checkmark:after {
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: 6px;
+        width: 4px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .materialCheckbox input[type='checkbox']:disabled ~ .checkmark {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .materialCheckbox input[type='checkbox']:disabled ~ .checkmark:hover {
+        border-color: #91a3bf;
+      }
+
+      .radioButtonsContainer {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .radioButton {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+
+        label {
+          margin: 0;
+          auto: 0;
+        }
+      }
+
+      .radioButtonInput {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .radioButtonLabel {
+        display: inline-block;
+        padding-left: 30px;
+        margin-bottom: 10px;
+        position: relative;
+        font-size: 16px;
+        color: #777777;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .radioButtonCustom {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid #555;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .radioButtonInput:checked + .radioButtonLabel .radioButtonCustom {
+        transform: translateY(-50%) scale(0.9);
+        border: 5px solid #4c8bf5;
+        color: #4c8bf5;
+      }
+
+      .radioButtonInput:checked + .radioButtonLabel {
+        color: #4c8bf5;
+      }
+
+      .radioButtonLabel:hover .radioButtonCustom {
+        transform: translateY(-50%) scale(1.2);
+        border-color: #4c8bf5;
+        box-shadow: 0 0 10px #4c8bf580;
+      }
+    }
+
+    .categoryDiv {
+      display: flex;
+    }
+  }
+
+  .questionContainer {
+    border: 1px solid rgb(158, 158, 158);
+    background-color: #c3d1d2;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    position: relative;
+
+    .deleteQuestion {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+    }
+
+    .questionNumber {
+      height: 100%;
+    }
+
+    .questionText {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .optionGroup {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+
+    .deleteOption {
+      cursor: pointer;
+    }
+  }
+
+  .addOption {
+    color: rgb(16, 99, 127);
+    cursor: pointer;
+  }
+
+  .questionTextInput {
+    width: 100%;
+    background-color: #ffffff;
+    color: #242424;
+    padding: 0.15rem 0.5rem;
+    min-height: 30px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    line-height: 1.15;
+    box-shadow: 0px 10px 20px -18px;
+  }
+
+  .questionTextInput:focus {
+    border-bottom: 2px solid #5b5fc7;
+    border-radius: 4px 4px 2px 2px;
+  }
+
+  .questionTextInput:hover {
+    outline: 1px solid lightgrey;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input[type='text'] {
+    border: 1px solid black;
+    width: 90%;
+    height: 25px;
+    padding: 5px;
+  }
+
+  .addQuestionsButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    button {
+      width: 33%;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .saveTest {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #3dc14c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .saveTest:hover {
+    background-color: #37a844;
+  }
+}

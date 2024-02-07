@@ -1,9 +1,15 @@
 /* Adjust the styles as per your design */
 .postContainer {
-  border: 1px solid #ccc;
+  border: 1px solid #838383;
   margin-bottom: 20px;
   padding: 15px;
   border-radius: 8px;
+  position: relative;
+
+  a {
+    cursor: pointer;
+    color: rgb(92, 0, 240);
+  }
 }
 
 .postHeader {
@@ -11,10 +17,38 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   font-weight: bold;
+}
+
+.dateBlock {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
+  position: absolute;
+  right: 30px;
+}
+
+.edit {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  cursor: pointer;
+}
+
+.delete{
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  cursor: pointer;
 }
 
 .postDateTime {

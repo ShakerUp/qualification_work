@@ -4,6 +4,7 @@
   overflow: hidden;
   font-size: 16px;
   border-radius: 0px 0px 15px 15px;
+  min-height: 75vh;
 
   .testItems {
     display: grid;
@@ -11,7 +12,6 @@
     gap: 16px;
     padding: 24px;
   }
-
 
   .testBlock {
     display: flex;

@@ -8,17 +8,18 @@ import Header from './components/Header/Header';
 
 import Home from './pages/Home';
 import Library from './pages/LibraryPage/Library';
-import TestCentre from './pages/TestCentre/TestCentre';
-import UserCabinet from './pages/UserCabinet/UserCabinet';
+import TestCentre from './pages/TestPages/TestCentre/TestCentre.jsx';
+import UserCabinet from './pages/User/UserCabinet/UserCabinet.jsx';
 import Auth from './pages/Auth/Auth';
-import CreateTest from './pages/CreateTest/CreateTest';
-import TestSheet from './components/TestComponents/TestSheet/TestSheet';
+import CreateTest from './pages/TestPages/CreateTest/CreateTest.jsx';
+import TestSheet from './pages/TestPages/TestSheet/TestSheet.jsx';
 import AdminPanel from './pages/Admin/Admin';
 import TeacherCabinet from './pages/Teacher/TeacherCabinet/TeacherCabinet.jsx';
 import TeacherTests from './pages/Teacher/TeacherTests/TeacherTests.jsx';
 import TeacherResults from './pages/Teacher/TeacherResults/TeacherResults.jsx';
 import TeacherAddPost from './pages/Teacher/TeacherAddPost/TeacherAddPost.jsx';
 import TeacherPosts from './pages/Teacher/TeacherPosts/TeacherPosts.jsx';
+import UserPosts from './pages/User/UserPosts/UserPosts.jsx';
 
 export const AuthContext = React.createContext();
 
@@ -75,14 +76,17 @@ function App() {
           <Route path="/library" element={<Library />} />
           <Route path="/test-centre" element={<TestCentre />} />
           <Route path="/user-cabinet" element={<UserCabinet />} />
+          <Route path="/teachers-posts" element={<UserPosts />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/create-test" element={<CreateTest />} />
           <Route path="/test/:testId" element={<TestSheet />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/teacher-cabinet" element={<TeacherCabinet />} />
-          <Route path="/teacher-cabinet/test" element={<TeacherTests />} />
+          <Route path="/teacher-cabinet/tests" element={<TeacherTests />} />
+          <Route path="/teacher-cabinet/tests/update/:testId" element={<CreateTest />} />
           <Route path="/teacher-cabinet/results" element={<TeacherResults />} />
           <Route path="/teacher-cabinet/posts/create" element={<TeacherAddPost />} />
+          <Route path="/teacher-cabinet/posts/edit/:postId" element={<TeacherAddPost />} />
           <Route path="/teacher-cabinet/posts" element={<TeacherPosts />} />
         </Routes>
       </div>

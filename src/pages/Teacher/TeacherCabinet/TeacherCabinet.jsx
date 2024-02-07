@@ -11,7 +11,7 @@ const TeacherCabinet = () => {
           header={'My Tests'}
           desc={''}
           mainImg={'img/book.png'}
-          link={'/teacher-cabinet/test'}
+          link={'/teacher-cabinet/tests'}
         />
         <InfoBlock
           header={'My Posts'}
@@ -20,7 +20,7 @@ const TeacherCabinet = () => {
           link={'/teacher-cabinet/posts'}
         />
         <InfoBlock
-          header={'Studets Results'}
+          header={'Students Results'}
           desc={''}
           mainImg={'img/user_1.png'}
           link={'/teacher-cabinet/results'}

@@ -56,12 +56,12 @@ const TeacherResults = () => {
       <div className={styles.libraryInfo}>
         <h1>Students Results</h1>
         <div className={styles.search}>
-          <img width={20} height={20} src="img/add.png" alt="Search" />
+          <img width={20} height={20} src="/img/search.png" alt="Search" />
           <input
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             type="text"
-            placeholder="Search for a topic..."
+            placeholder="Search for a student or test..."
           />
         </div>
       </div>

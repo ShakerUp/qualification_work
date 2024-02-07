@@ -10,6 +10,7 @@
   height: 100px;
   margin-top: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 
   &:hover {
     transform: translateY(-5px);
@@ -23,6 +24,27 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .delete {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    cursor: pointer;
+  }
+  .edit {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    cursor: pointer;
+  }
+  .copy {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
   }
 
   .answersButton {

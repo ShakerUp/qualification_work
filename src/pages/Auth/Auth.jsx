@@ -10,7 +10,6 @@ const Auth = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     mode: 'all',
@@ -18,7 +17,27 @@ const Auth = () => {
 
   const [isLogin, setIsLogin] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState('');
+  const [selectedForm, setSelectedForm] = React.useState('');
   const { user, checkAuth } = React.useContext(AuthContext);
+
+  const formOptions = [
+    '8А',
+    '8Б',
+    '8В',
+    '8Г',
+    '9А',
+    '9Б',
+    '9В',
+    '9Г',
+    '10А',
+    '10Б',
+    '10В',
+    '10Г',
+    '11А',
+    '11Б',
+    '11В',
+    '11Г',
+  ];
 
   const onSubmit = async (data) => {
     setErrorMessage('');
@@ -69,29 +88,50 @@ const Auth = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           {!isLogin && (
             <>
-              <div className={styles.formGroup}>
-                <label htmlFor="name" className={styles.label}>
-                  Name:
-                </label>
-                <input
-                  {...register('name', { required: 'Name is required' })}
-                  type="name"
-                  id="name"
-                  className={styles.input}
-                />
-                {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+              <div className={styles.wideGroup}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="name" className={styles.label}>
+                    Name:
+                  </label>
+                  <input
+                    {...register('name', { required: 'Name is required' })}
+                    type="name"
+                    id="name"
+                    className={styles.input}
+                  />
+                  {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="surname" className={styles.label}>
+                    Surname:
+                  </label>
+                  <input
+                    {...register('surname', { required: 'Surname is required' })}
+                    type="name"
+                    id="surname"
+                    className={styles.input}
+                  />
+                  {errors.surname && <p className={styles.error}>{errors.surname.message}</p>}
+                </div>
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="surname" className={styles.label}>
-                  Surname:
+                <label htmlFor="form" className={styles.label}>
+                  Form:
                 </label>
-                <input
-                  {...register('surname', { required: 'Surname is required' })}
-                  type="name"
-                  id="surname"
+                <select
+                  {...register('form', { required: 'Form is required' })}
+                  id="form"
                   className={styles.input}
-                />
-                {errors.surname && <p className={styles.error}>{errors.surname.message}</p>}
+                  value={selectedForm}
+                  onChange={(e) => setSelectedForm(e.target.value)}>
+                  <option value="">Select Form</option>
+                  {formOptions.map((formOption) => (
+                    <option key={formOption} value={formOption}>
+                      {formOption}
+                    </option>
+                  ))}
+                </select>
+                {errors.form && <p className={styles.error}>{errors.form.message}</p>}
               </div>
             </>
           )}

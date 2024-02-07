@@ -1,12 +1,12 @@
 import React from 'react';
-import axios from '../../axios';
+import axios from '../../../axios';
 
 import styles from './UserCabinet.module.scss'; // Import the SCSS module
 
-import Unauthorized from '../../components/Unauthorized/Unauthorized';
+import Unauthorized from '../../../components/Unauthorized/Unauthorized';
 
-import { AuthContext } from '../../App';
-import CabinetPopUp from '../../components/CabinetPopUp/CabinetPopUp';
+import { AuthContext } from '../../../App';
+import CabinetPopUp from '../../../components/CabinetPopUp/CabinetPopUp';
 
 const UserCabinet = () => {
   const [userResults, setUserResults] = React.useState([]);
@@ -25,7 +25,7 @@ const UserCabinet = () => {
   const fetchUserResultsData = async () => {
     try {
       const response = await axios.get('/tests/user-results');
-      setUserResults(response.data.userResults);
+      setUserResults(response.data.userResults.reverse());
       setTestsDone(response.data.userResults.length);
       setUserData({ name: response.data.name, surname: response.data.surname });
     } catch (error) {
@@ -47,11 +47,6 @@ const UserCabinet = () => {
 
   const handlePopUpClose = () => {
     setPopUpVisible(false);
-  };
-
-  const convertDate = (date) => {
-    const splited = date.split('T');
-    return splited[0] + ' ' + splited[1].slice(0, -5);
   };
 
   const calculateAverageMark = () => {
@@ -96,7 +91,7 @@ const UserCabinet = () => {
               </span>
             </div>
             <div className={styles.resultBlockInfo}>
-              <span>{convertDate(testResult.createdAt)}</span>
+              <span>{new Date(testResult.createdAt).toLocaleString()}</span>
               <button
                 onClick={(id) => fetchTestCorrectAnswers(testResult._id)}
                 className={styles.answersButton}>

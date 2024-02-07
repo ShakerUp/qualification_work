@@ -26,20 +26,41 @@ const TeacherTests = () => {
     try {
       const response = await axios.get(`/tests/teachers-test`);
       console.log(response);
-      setTests(response.data.tests);
+      setTests(response.data.tests.reverse());
     } catch (err) {
       setError('Error fetching tests');
     }
   };
 
+  const handleDelete = async (testId) => {
+    try {
+      const response = await axios.delete(`/tests/delete/${testId}`);
+      console.log(response);
+      // If successful, update the state to reflect the changes
+      setTests((prevTests) => prevTests.filter((test) => test._id !== testId));
+    } catch (err) {
+      console.error('Error deleting test:', err);
+      setError('Error deleting test');
+    }
+  };
+
+  const handleCopyLink = (testId) => {
+    const testLink = `${window.location.origin}/test/${testId}`;
+    navigator.clipboard.writeText(testLink).then(
+      () => {
+        console.log('Link copied to clipboard:', testLink);
+        // Optionally, you can show a success message or perform any other action.
+      },
+      (err) => {
+        console.error('Error copying link to clipboard:', err);
+        // Optionally, you can show an error message or perform any other action.
+      },
+    );
+  };
+
   if (!user.isAuthenticated || user.role === 'user') {
     return <Unauthorized />;
   }
-
-  const convertDate = (date) => {
-    const splited = date.split('T');
-    return splited[0] + ' ' + splited[1].slice(0, -5);
-  };
 
   return (
     <div className={styles.content}>
@@ -47,22 +68,43 @@ const TeacherTests = () => {
       {error && <p>{error}</p>}
       <ul>
         {tests.map((test) => (
-          <Link to={`/test/${test._id}`}>
-            <div key={test._id} className={styles.resultBlock}>
-              <div className={styles.resultBlockInfo}>
+          <div key={test._id} className={styles.resultBlock}>
+            <img
+              className={styles.copy}
+              onClick={() => handleCopyLink(test._id)}
+              width={20}
+              height={20}
+              src="/img/copy.png"
+              alt="Delete"
+            />
+            <Link to={`/test/${test._id}`}>
+              <div className={`${styles.resultBlockInfo} ${styles.pointer}`}>
                 <h3>{test.testName}</h3>
                 <span>
                   Number of questions: <strong>{test.numberOfQuestions}</strong>
                 </span>
               </div>
-              <div className={styles.resultBlockInfo}>
-                <span>{convertDate(test.createdAt)}</span>
-                <span>
-                  This test was done <strong>{test.timesDone}</strong> times.
-                </span>
+            </Link>
+            <Link to={`/teacher-cabinet/tests/update/${test._id}`}>
+              <img className={styles.edit} width={20} height={20} src="/img/edit.png" alt="Edit" />
+            </Link>
+            <div className={styles.resultBlockInfo}>
+              <div>
+                <span>{new Date(test.createdAt).toLocaleString()}</span>
+                <img
+                  className={styles.delete}
+                  onClick={() => handleDelete(test._id)}
+                  width={20}
+                  height={20}
+                  src="/img/delete.png"
+                  alt="Delete"
+                />
               </div>
+              <span>
+                This test was done <strong>{test.timesDone}</strong> times.
+              </span>
             </div>
-          </Link>
+          </div>
         ))}
       </ul>
     </div>

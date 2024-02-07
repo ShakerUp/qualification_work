@@ -14,18 +14,11 @@ const PopUp = ({ title, description, onClose, opened }) => {
           className={styles.popupCross}
           width={25}
           height={25}
-          src='img/cross.svg'
-          alt='Quit'
+          src="img/cross.svg"
+          alt="Quit"
         />
-        {/* <img
-          src={topic.image}
-          alt='Topic'
-        /> */}
         <div className={styles.description}>
-          <ReactMarkdown
-            children={description}
-            remarkPlugins={[remarkGfm]}
-          />
+          <ReactMarkdown children={description} remarkPlugins={[remarkGfm]} />
         </div>
       </div>
     </div>
